@@ -30,7 +30,6 @@
 
 package com.yalantis.ucrop.util;
 
-import android.media.ExifInterface;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -39,6 +38,8 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
+
+import androidx.exifinterface.media.ExifInterface;
 
 /**
  * A class for parsing the exif orientation from an image header.
@@ -377,7 +378,7 @@ public class ImageHeaderParser {
 
     public static void copyExif(ExifInterface originalExif, int width, int height, String imageOutputPath) {
         String[] attributes = new String[]{
-                ExifInterface.TAG_APERTURE,
+                ExifInterface.TAG_F_NUMBER,
                 ExifInterface.TAG_DATETIME,
                 ExifInterface.TAG_DATETIME_DIGITIZED,
                 ExifInterface.TAG_EXPOSURE_TIME,
@@ -392,12 +393,12 @@ public class ImageHeaderParser {
                 ExifInterface.TAG_GPS_LONGITUDE_REF,
                 ExifInterface.TAG_GPS_PROCESSING_METHOD,
                 ExifInterface.TAG_GPS_TIMESTAMP,
-                ExifInterface.TAG_ISO,
+                ExifInterface.TAG_PHOTOGRAPHIC_SENSITIVITY,
                 ExifInterface.TAG_MAKE,
                 ExifInterface.TAG_MODEL,
                 ExifInterface.TAG_SUBSEC_TIME,
-                ExifInterface.TAG_SUBSEC_TIME_DIG,
-                ExifInterface.TAG_SUBSEC_TIME_ORIG,
+                ExifInterface.TAG_SUBSEC_TIME_DIGITIZED,
+                ExifInterface.TAG_SUBSEC_TIME_ORIGINAL,
                 ExifInterface.TAG_WHITE_BALANCE
         };
 
