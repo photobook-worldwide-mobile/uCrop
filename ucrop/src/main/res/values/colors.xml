@@ -7,11 +7,12 @@
     <color name="ucrop_color_ebony_clay">#20242F</color>
     <color name="ucrop_color_heather">#B3BECE</color>
     <color name="ucrop_color_white">#FFF</color>
+    <color name="ucrop_color_transparent">#00000000</color>
 
     <!--uCrop Activity-->
     <color name="ucrop_color_toolbar">@color/ucrop_color_white</color>
     <color name="ucrop_color_statusbar">#f5f5f5</color>
-    <color name="ucrop_color_toolbar_widget">@color/ucrop_color_black</color>
+    <color name="ucrop_color_toolbar_widget">#fff</color>
     <color name="ucrop_color_widget">@color/ucrop_color_black</color>
     <color name="ucrop_color_widget_active">@color/ucrop_color_white</color>
     <color name="ucrop_color_active_controls_color">@color/ucrop_color_blaze_orange</color>
@@ -20,7 +21,7 @@
     <color name="ucrop_color_widget_rotate_angle">@color/ucrop_color_ebony_clay</color>
     <color name="ucrop_color_active_aspect_ratio">@color/ucrop_color_blaze_orange</color>
     <color name="ucrop_color_inactive_aspect_ratio">@color/ucrop_color_ebony_clay</color>
-    <color name="ucrop_color_widget_background">@color/ucrop_color_ebony_clay</color>
+    <color name="ucrop_color_widget_background">@color/ucrop_color_white</color>
     <color name="ucrop_color_widget_text">@color/ucrop_color_blaze_orange</color>
     <color name="ucrop_color_progress_wheel_line">@color/ucrop_color_ebony_clay</color>
     <color name="ucrop_color_crop_background">@color/ucrop_color_black</color>
@@ -30,5 +31,24 @@
     <color name="ucrop_color_default_crop_frame">#ffffff</color>
     <color name="ucrop_color_default_dimmed">#8c000000</color>
     <color name="ucrop_color_default_logo">#4f212121</color>
+
+    <!--Photobook colors-->
+    <color name="ucrop_navy_blue">#2F5878</color>
+    <color name="ucrop_pb_blue">#4480AA</color>
+    <color name="ucrop_baby_blue">#A2BFD5</color>
+    <color name="ucrop_light_blue">#ECF2F6</color>
+
+    <color name="ucrop_blush_red">#D9534F</color>
+    <color name="ucrop_tangerine">#F56701</color>
+    <color name="ucrop_peach">#FEE8D9</color>
+    <color name="ucrop_tan">#FBF4ED</color>
+
+    <color name="ucrop_charcoal_grey">#4A4A4A</color>
+    <color name="ucrop_grey">#666666</color>
+    <color name="ucrop_stone_grey">#9B9B9B</color>
+    <color name="ucrop_light_grey">#CCCBCB</color>
+    <color name="ucrop_fog_grey">#E0E0E0</color>
+    <color name="ucrop_lighter_grey">#F8F8F8</color>
+    <color name="ucrop_blush_red_translucent">#B3D9534F</color>
 
 </resources>
