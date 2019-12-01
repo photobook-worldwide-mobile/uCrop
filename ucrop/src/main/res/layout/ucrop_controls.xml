@@ -112,7 +112,7 @@
 
             <TextView
                 android:id="@+id/text_view_button_reset"
-                android:text="Reset"
+                android:text="@string/ucrop_reset"
                 style="@style/ucrop_TextViewWidget"/>
 
         </LinearLayout>
