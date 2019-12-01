@@ -6,6 +6,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorButtonNormal">@color/colorAccent</item>
+        <item name="actionMenuTextColor">@color/colorAccent</item>
+        <item name="actionButtonStyle">@style/App.ActionBar.ActionButtonStyle</item>
+    </style>
+
+    <style name="App.UCropTheme" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="App.ActionBar.ActionButtonStyle" parent="Widget.AppCompat.Light.ActionButton">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
