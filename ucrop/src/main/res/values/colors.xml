@@ -22,7 +22,7 @@
     <color name="ucrop_color_active_aspect_ratio">@color/ucrop_color_blaze_orange</color>
     <color name="ucrop_color_inactive_aspect_ratio">@color/ucrop_color_ebony_clay</color>
     <color name="ucrop_color_widget_background">@color/ucrop_color_white</color>
-    <color name="ucrop_color_widget_text">@color/ucrop_color_blaze_orange</color>
+    <color name="ucrop_color_widget_text">@color/ucrop_grey</color>
     <color name="ucrop_color_progress_wheel_line">@color/ucrop_color_ebony_clay</color>
     <color name="ucrop_color_crop_background">@color/ucrop_color_black</color>
 
