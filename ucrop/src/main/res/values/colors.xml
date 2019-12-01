@@ -12,10 +12,10 @@
     <!--uCrop Activity-->
     <color name="ucrop_color_toolbar">@color/ucrop_color_white</color>
     <color name="ucrop_color_statusbar">#f5f5f5</color>
-    <color name="ucrop_color_toolbar_widget">#fff</color>
+    <color name="ucrop_color_toolbar_widget">@color/ucrop_grey</color>
     <color name="ucrop_color_widget">@color/ucrop_color_black</color>
-    <color name="ucrop_color_widget_active">@color/ucrop_color_white</color>
-    <color name="ucrop_color_active_controls_color">@color/ucrop_color_blaze_orange</color>
+    <color name="ucrop_color_widget_active">@color/ucrop_pb_blue</color>
+    <color name="ucrop_color_active_controls_color">@color/ucrop_pb_blue</color>
     <color name="ucrop_color_inactive_controls_color">@color/ucrop_color_heather</color>
     <color name="ucrop_color_widget_rotate_mid_line">@color/ucrop_color_blaze_orange</color>
     <color name="ucrop_color_widget_rotate_angle">@color/ucrop_color_ebony_clay</color>
