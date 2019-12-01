@@ -4,9 +4,8 @@
 
     <item
         android:id="@+id/menu_crop"
-        android:icon="@drawable/ucrop_ic_done"
-        android:title="@string/ucrop_menu_crop"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/ucrop_done"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/menu_loader"

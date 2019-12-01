@@ -150,13 +150,13 @@ public class UCropActivity extends AppCompatActivity {
             ((Animatable) menuItemLoader.getIcon()).start();
         }
 
-        MenuItem menuItemCrop = menu.findItem(R.id.menu_crop);
-        Drawable menuItemCropIcon = ContextCompat.getDrawable(this, mToolbarCropDrawable);
-        if (menuItemCropIcon != null) {
-            menuItemCropIcon.mutate();
-            menuItemCropIcon.setColorFilter(mToolbarWidgetColor, PorterDuff.Mode.SRC_ATOP);
-            menuItemCrop.setIcon(menuItemCropIcon);
-        }
+//        MenuItem menuItemCrop = menu.findItem(R.id.menu_crop);
+//        Drawable menuItemCropIcon = ContextCompat.getDrawable(this, mToolbarCropDrawable);
+//        if (menuItemCropIcon != null) {
+//            menuItemCropIcon.mutate();
+//            menuItemCropIcon.setColorFilter(mToolbarWidgetColor, PorterDuff.Mode.SRC_ATOP);
+//            menuItemCrop.setIcon(menuItemCropIcon);
+//        }
 
         return true;
     }

@@ -11,5 +11,6 @@
     <string name="ucrop_scale">Scale</string>
     <string name="ucrop_crop">Crop</string>
     <string name="ucrop_reset">Reset</string>
+    <string name="ucrop_done">Done</string>
 
 </resources>
