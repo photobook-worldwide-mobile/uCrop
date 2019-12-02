@@ -280,6 +280,8 @@ public class UCropActivity extends AppCompatActivity {
             defaultAspectRatio = CropImageView.SOURCE_IMAGE_ASPECT_RATIO;
         }
         mGestureCropImageView.setTargetAspectRatio(defaultAspectRatio);
+        int startingRotationAngle = intent.getIntExtra(UCrop.EXTRA_STARTING_ROTATION_ANGLE, 0);
+        mGestureCropImageView.setStartingRotationAngle(startingRotationAngle);
 
         // Result bitmap max size options
         int maxSizeX = intent.getIntExtra(UCrop.EXTRA_MAX_SIZE_X, 0);

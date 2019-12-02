@@ -45,6 +45,7 @@ public class CropImageView extends TransformImageView {
 
     private float mTargetAspectRatio;
     private float mMaxScaleMultiplier = DEFAULT_MAX_SCALE_MULTIPLIER;
+    private int mStartingRotationAngle;
 
     private CropBoundsChangeListener mCropBoundsChangeListener;
 
@@ -152,6 +153,14 @@ public class CropImageView extends TransformImageView {
         if (mCropBoundsChangeListener != null) {
             mCropBoundsChangeListener.onCropAspectRatioChanged(mTargetAspectRatio);
         }
+    }
+
+    /**
+     * @author azri92
+     * @param rotationAngle in degrees
+     */
+    public void setStartingRotationAngle(int rotationAngle) {
+        mStartingRotationAngle = rotationAngle;
     }
 
     @Nullable
@@ -498,6 +507,8 @@ public class CropImageView extends TransformImageView {
      * This method calculates initial image position so it is positioned properly.
      * Then it sets those values to the current image matrix.
      *
+     * azri92: "properly" here means that it's center-cropped and within bounds of the crop rect.
+     *
      * @param drawableWidth  - image width
      * @param drawableHeight - image height
      */
@@ -505,18 +516,37 @@ public class CropImageView extends TransformImageView {
         float cropRectWidth = mCropRect.width();
         float cropRectHeight = mCropRect.height();
 
-        float widthScale = mCropRect.width() / drawableWidth;
-        float heightScale = mCropRect.height() / drawableHeight;
+        // azri92 - Consider starting rotation angle
+        float realDrawableWidth = mStartingRotationAngle > 0 ? drawableHeight : drawableWidth;
+        float realDrawableHeight = mStartingRotationAngle > 0 ? drawableWidth : drawableHeight;
+
+        float widthScale = mCropRect.width() / realDrawableWidth;
+        float heightScale = mCropRect.height() / realDrawableHeight;
 
         float initialMinScale = Math.max(widthScale, heightScale);
 
-        float tw = (cropRectWidth - drawableWidth * initialMinScale) / 2.0f + mCropRect.left;
-        float th = (cropRectHeight - drawableHeight * initialMinScale) / 2.0f + mCropRect.top;
-
         mCurrentImageMatrix.reset();
         mCurrentImageMatrix.postScale(initialMinScale, initialMinScale);
-        mCurrentImageMatrix.postTranslate(tw, th);
+        if (mStartingRotationAngle > 0) {
+            mCurrentImageMatrix.postRotate(mStartingRotationAngle);
+        } else {
+            float tw = (cropRectWidth - realDrawableWidth * initialMinScale) / 2.0f + mCropRect.left;
+            float th = (cropRectHeight - realDrawableHeight * initialMinScale) / 2.0f + mCropRect.top;
+            mCurrentImageMatrix.postTranslate(tw, th);
+        }
+
         setImageMatrix(mCurrentImageMatrix);
+
+        if (mStartingRotationAngle > 0) {
+            // At this point, the drawable is out of the crop bounds so we want to bring it back in
+            setImageToWrapCropBounds(false);
+            // And now the drawable is protruding out the left side of the crop boundary so we center it by pushing it
+            // a bit to the right
+            float updatedDrawableWidth = realDrawableWidth * initialMinScale;
+            float translateX = (updatedDrawableWidth - cropRectWidth) / 2f;
+            mCurrentImageMatrix.postTranslate(translateX, 0);
+            setImageMatrix(mCurrentImageMatrix);
+        }
     }
 
     /**

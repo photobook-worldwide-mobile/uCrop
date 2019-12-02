@@ -12,18 +12,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 
-import com.yalantis.ucrop.model.AspectRatio;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.FloatRange;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.yalantis.ucrop.model.AspectRatio;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Created by Oleksii Shliama (https://github.com/shliama).
@@ -55,6 +55,8 @@ public class UCrop {
 
     public static final String EXTRA_MAX_SIZE_X = EXTRA_PREFIX + ".MaxSizeX";
     public static final String EXTRA_MAX_SIZE_Y = EXTRA_PREFIX + ".MaxSizeY";
+
+    public static final String EXTRA_STARTING_ROTATION_ANGLE = EXTRA_PREFIX + ".StartingRotationAngle";
 
     private Intent mCropIntent;
     private Bundle mCropOptionsBundle;
@@ -97,6 +99,17 @@ public class UCrop {
     public UCrop withAspectRatio(float x, float y) {
         mCropOptionsBundle.putFloat(EXTRA_ASPECT_RATIO_X, x);
         mCropOptionsBundle.putFloat(EXTRA_ASPECT_RATIO_Y, y);
+        return this;
+    }
+
+    /**
+     * @author azri92
+     * Set value of the angle to immediately rotate the image to when starting to edit.
+     *
+     * @param angle of rotation
+     */
+    public UCrop startWithRotation(int angle) {
+        mCropOptionsBundle.putInt(EXTRA_STARTING_ROTATION_ANGLE, angle);
         return this;
     }
 
