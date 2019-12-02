@@ -624,10 +624,12 @@ public class UCropActivity extends AppCompatActivity {
         if (stateViewId == R.id.state_scale) {
             setAllowedGestures(0);
         } else if (stateViewId == R.id.state_rotate) {
-            setAllowedGestures(1);
-        } else {
-            setAllowedGestures(2);
+//            setAllowedGestures(1);
+            rotateByAngle(90);
         }
+//        } else {
+//            setAllowedGestures(2);
+//        }
     }
 
     private void changeSelectedTab(int stateViewId) {
