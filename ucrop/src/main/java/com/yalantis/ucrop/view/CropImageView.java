@@ -374,6 +374,10 @@ public class CropImageView extends TransformImageView {
     @Override
     protected void onImageLaidOut() {
         super.onImageLaidOut();
+
+        // azri92 - prevent animation until after image & crop overlay has been set up
+        shouldAnimate = false;
+
         final Drawable drawable = getDrawable();
         if (drawable == null) {
             return;
@@ -416,6 +420,9 @@ public class CropImageView extends TransformImageView {
             mTransformImageListener.onScale(getCurrentScale());
             mTransformImageListener.onRotate(getCurrentAngle());
         }
+
+        // azri92 - start animation after image & crop overlay has been set up
+        shouldAnimate = true;
     }
 
     /**
