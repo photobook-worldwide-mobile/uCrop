@@ -8,6 +8,11 @@
     <string name="label_image_source">Image source</string>
     <string name="label_square">Square</string>
     <string name="label_max_cropped_image_size">Max cropped image size</string>
+    <string name="label_starting_rotation">Starting rotation</string>
+    <string name="label_starting_0">0</string>
+    <string name="label_starting_90">90</string>
+    <string name="label_starting_180">180</string>
+    <string name="label_starting_270">270</string>
     <string name="label_compression_settings">Compression settings</string>
     <string name="label_ui">UI</string>
     <string name="label_width">Width</string>

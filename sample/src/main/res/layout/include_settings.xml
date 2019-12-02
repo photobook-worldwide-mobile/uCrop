@@ -141,6 +141,55 @@
                 android:layout_margin="5dp"
                 android:background="@color/colorAccent" />
 
+            <RadioGroup
+                android:id="@+id/radio_group_starting_rotation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/label_starting_rotation"
+                    android:textAppearance="?android:textAppearanceSmall" />
+
+                <RadioButton
+                    android:id="@+id/radio_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_starting_0"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    tools:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/radio_90"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_starting_90"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+                <RadioButton
+                    android:id="@+id/radio_180"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_starting_180"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+                <RadioButton
+                    android:id="@+id/radio_270"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_starting_270"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="@color/colorAccent" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

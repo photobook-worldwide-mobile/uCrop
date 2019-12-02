@@ -22,6 +22,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
@@ -59,7 +60,7 @@ public class SampleActivity extends BaseActivity implements UCropFragmentCallbac
     private static final int REQUEST_VIEW_EDIT = 0x03;
     private static final String SAMPLE_CROPPED_IMAGE_NAME = "SampleCropImage";
 
-    private RadioGroup mRadioGroupAspectRatio, mRadioGroupCompressionSettings;
+    private RadioGroup mRadioGroupAspectRatio, mRadioGroupCompressionSettings, mRadioGroupStartingRotation;
     private EditText mEditTextMaxWidth, mEditTextMaxHeight;
     private EditText mEditTextRatioX, mEditTextRatioY;
     private CheckBox mCheckBoxMaxSize;
@@ -197,6 +198,7 @@ public class SampleActivity extends BaseActivity implements UCropFragmentCallbac
         });
         settingsView = findViewById(R.id.settings);
         mRadioGroupAspectRatio = findViewById(R.id.radio_group_aspect_ratio);
+        mRadioGroupStartingRotation = findViewById(R.id.radio_group_starting_rotation);
         mRadioGroupCompressionSettings = findViewById(R.id.radio_group_compression_settings);
         mCheckBoxMaxSize = findViewById(R.id.checkbox_max_size);
         mEditTextRatioX = findViewById(R.id.edit_text_ratio_x);
@@ -209,6 +211,7 @@ public class SampleActivity extends BaseActivity implements UCropFragmentCallbac
         mCheckBoxFreeStyleCrop = findViewById(R.id.checkbox_freestyle_crop);
 
         mRadioGroupAspectRatio.check(R.id.radio_dynamic);
+        mRadioGroupStartingRotation.check(R.id.radio_0);
         mEditTextRatioX.addTextChangedListener(mAspectRatioTextWatcher);
         mEditTextRatioY.addTextChangedListener(mAspectRatioTextWatcher);
         mRadioGroupCompressionSettings.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -336,6 +339,11 @@ public class SampleActivity extends BaseActivity implements UCropFragmentCallbac
                 }
                 break;
         }
+
+        int checkedRotationRadioId = mRadioGroupStartingRotation.getCheckedRadioButtonId();
+        RadioButton checkedRotationRadioButton = findViewById(checkedRotationRadioId);
+        int startingRotationAngle = Integer.parseInt(checkedRotationRadioButton.getText().toString());
+        uCrop = uCrop.startWithRotation(startingRotationAngle);
 
         if (mCheckBoxMaxSize.isChecked()) {
             try {
