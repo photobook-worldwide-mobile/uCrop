@@ -73,23 +73,9 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/state_rotate"
-            style="@style/ucrop_WrapperIconState">
-
-            <ImageView
-                android:id="@+id/image_view_state_rotate"
-                style="@style/ucrop_ImageViewWidgetIcon"
-                app:srcCompat="@drawable/ucrop_rotate" />
-
-            <TextView
-                android:id="@+id/text_view_rotate"
-                style="@style/ucrop_TextViewWidget"
-                android:text="@string/ucrop_rotate" />
-                android:textColor="@color/ucrop_pb_blue"/>
-
-        </LinearLayout>
-
+        <!-- azri92 - Using it as "crop". May look into removing this in the future since the
+                      UI doesn't really make sense since user doesn't have to be in "Crop" mode
+                      to be able to scale for cropping -->
         <LinearLayout
             android:id="@+id/state_scale"
             style="@style/ucrop_WrapperIconState">
@@ -97,12 +83,29 @@
             <ImageView
                 android:id="@+id/image_view_state_scale"
                 style="@style/ucrop_ImageViewWidgetIcon"
-                app:srcCompat="@drawable/ucrop_scale" />
+                app:srcCompat="@drawable/ucrop_ic_crop" />
 
             <TextView
                 android:id="@+id/text_view_scale"
                 style="@style/ucrop_TextViewWidget"
-                android:text="@string/ucrop_scale" />
+                android:text="@string/ucrop_crop"
+                android:textColor="@color/ucrop_pb_blue"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/state_rotate"
+            style="@style/ucrop_WrapperIconState">
+
+            <ImageView
+                android:id="@+id/image_view_state_rotate"
+                style="@style/ucrop_ImageViewWidgetIcon"
+                app:srcCompat="@drawable/ucrop_ic_rotate" />
+
+            <TextView
+                android:id="@+id/text_view_rotate"
+                style="@style/ucrop_TextViewWidget"
+                android:text="@string/ucrop_rotate" />
 
         </LinearLayout>
 
