@@ -15,6 +15,9 @@
         android:id="@+id/view_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/ucrop_padding_crop_frame"/>
+        android:paddingTop="@dimen/ucrop_padding_crop_frame"
+        android:paddingStart="@dimen/ucrop_padding_crop_frame"
+        android:paddingEnd="@dimen/ucrop_padding_crop_frame"
+        android:paddingBottom="@dimen/ucrop_padding_crop_frame_bottom"/>
 
 </merge>

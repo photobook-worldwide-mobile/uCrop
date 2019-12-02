@@ -2,6 +2,7 @@
 
     <!--uCrop Activity-->
     <dimen name="ucrop_padding_crop_frame">16dp</dimen>
+    <dimen name="ucrop_padding_crop_frame_bottom">80dp</dimen> <!-- ucrop_padding_crop_frame + ucrop_height_wrapper_controls -->
     <dimen name="ucrop_size_dot_scale_text_view">8dp</dimen>
     <dimen name="ucrop_height_horizontal_wheel_progress_line">20dp</dimen>
     <dimen name="ucrop_width_horizontal_wheel_progress_line">2dp</dimen>

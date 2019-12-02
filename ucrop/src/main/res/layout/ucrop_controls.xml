@@ -5,12 +5,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <!-- azri92 - Not used by Photobook -->
     <FrameLayout
         android:id="@+id/wrapper_controls"
         android:layout_width="match_parent"
         android:layout_height="@dimen/ucrop_height_wrapper_controls"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="0dp"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="match_parent"
@@ -51,16 +53,18 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <!-- azri92 - Not used by Photobook -->
         <LinearLayout
             android:id="@+id/state_aspect_ratio"
-            style="@style/ucrop_WrapperIconState">
+            style="@style/ucrop_WrapperIconState"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/image_view_state_aspect_ratio"
                 style="@style/ucrop_ImageViewWidgetIcon"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:srcCompat="@drawable/ucrop_crop" />
+                app:srcCompat="@drawable/ucrop_ic_crop" />
 
             <TextView
                 android:id="@+id/text_view_crop"
