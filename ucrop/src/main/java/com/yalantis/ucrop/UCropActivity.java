@@ -677,6 +677,7 @@ public class UCropActivity extends AppCompatActivity {
                     int offsetY,
                     int imageWidth,
                     int imageHeight,
+                    float rotationAngle,
                     float[] savedImageMatrixValues,
                     RectF cropRect
             ) {
@@ -686,6 +687,7 @@ public class UCropActivity extends AppCompatActivity {
                         offsetY,
                         imageWidth,
                         imageHeight,
+                        rotationAngle,
                         savedImageMatrixValues,
                         cropRect);
                 finish();
@@ -706,6 +708,7 @@ public class UCropActivity extends AppCompatActivity {
             int offsetY,
             int imageWidth,
             int imageHeight,
+            float rotationAngle,
             float[] savedImageMatrixValues,
             RectF cropFrameRect
     ) {
@@ -716,6 +719,7 @@ public class UCropActivity extends AppCompatActivity {
                 .putExtra(UCrop.EXTRA_OUTPUT_IMAGE_HEIGHT, imageHeight)
                 .putExtra(UCrop.EXTRA_OUTPUT_OFFSET_X, offsetX)
                 .putExtra(UCrop.EXTRA_OUTPUT_OFFSET_Y, offsetY)
+                .putExtra(UCrop.EXTRA_OUTPUT_ROTATION_ANGLE, rotationAngle)
                 .putExtra(UCrop.EXTRA_IMAGE_MATRIX_VALUES, savedImageMatrixValues)
                 .putExtra(UCrop.EXTRA_CROP_FRAME_RECT, cropFrameRect)
         );

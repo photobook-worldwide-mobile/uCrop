@@ -13,6 +13,7 @@ public interface BitmapCropCallback {
             int offsetY,
             int imageWidth,
             int imageHeight,
+            float rotationAngle,
             float[] imageMatrixValues,
             RectF cropRect);
 

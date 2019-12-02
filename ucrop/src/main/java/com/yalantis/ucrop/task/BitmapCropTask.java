@@ -202,6 +202,7 @@ public class BitmapCropTask extends AsyncTask<Void, Void, Throwable> {
                         cropOffsetY,
                         mCroppedImageWidth,
                         mCroppedImageHeight,
+                        mCurrentAngle,
                         imageMatrixValues,
                         mCropRect);
             } else {
