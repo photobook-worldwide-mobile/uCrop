@@ -302,7 +302,7 @@ public class SampleActivity extends BaseActivity implements UCropFragmentCallbac
         UCrop uCrop = mSavedImageState.getUcropConfig();
         uCrop = uCrop.withSavedState(
                 mSavedImageState.getImageMatrixValues(),
-                mSavedImageState.getCropRect());
+                mSavedImageState.getCropFrameRect());
 
         uCrop.start(SampleActivity.this);
     }
@@ -431,9 +431,9 @@ public class SampleActivity extends BaseActivity implements UCropFragmentCallbac
             if (mIsLocalImage) {
                 // azri92 - set values for last state only for local image
                 float[] matrixValues = result.getFloatArrayExtra(UCrop.EXTRA_IMAGE_MATRIX_VALUES);
-                RectF cropRect = result.getParcelableExtra(UCrop.EXTRA_CROP_RECT);
+                RectF cropFrameRect = result.getParcelableExtra(UCrop.EXTRA_CROP_FRAME_RECT);
                 mSavedImageState.setImageMatrixValues(matrixValues);
-                mSavedImageState.setCropRect(cropRect);
+                mSavedImageState.setCropFrameRect(cropFrameRect);
                 goToResultActivityWithSavedState(resultUri);
             } else {
                 ResultActivity.startWithUri(this, resultUri);

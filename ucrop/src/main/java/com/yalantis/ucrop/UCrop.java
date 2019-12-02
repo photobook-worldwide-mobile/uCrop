@@ -46,7 +46,7 @@ public class UCrop {
     public static final String EXTRA_OUTPUT_OFFSET_X = EXTRA_PREFIX + ".OffsetX";
     public static final String EXTRA_OUTPUT_OFFSET_Y = EXTRA_PREFIX + ".OffsetY";
     public static final String EXTRA_IMAGE_MATRIX_VALUES = EXTRA_PREFIX + ".ImageMatrixValues";
-    public static final String EXTRA_CROP_RECT = EXTRA_PREFIX + ".CropRect";
+    public static final String EXTRA_CROP_FRAME_RECT = EXTRA_PREFIX + ".CropRect";
     public static final String EXTRA_ERROR = EXTRA_PREFIX + ".Error";
 
     public static final String EXTRA_ASPECT_RATIO_X = EXTRA_PREFIX + ".AspectRatioX";
@@ -78,11 +78,11 @@ public class UCrop {
     /**
      * @author azri92
      * @param imageMatrixValues values of previous image matrix before crop.
-     * @param cropRect of previous edit.
+     * @param cropFrameRect of previous edit.
      */
-    public UCrop withSavedState(@NonNull float[] imageMatrixValues, @NonNull RectF cropRect) {
+    public UCrop withSavedState(@NonNull float[] imageMatrixValues, @NonNull RectF cropFrameRect) {
         mCropOptionsBundle.putFloatArray(EXTRA_IMAGE_MATRIX_VALUES, imageMatrixValues);
-        mCropOptionsBundle.putParcelable(EXTRA_CROP_RECT, cropRect);
+        mCropOptionsBundle.putParcelable(EXTRA_CROP_FRAME_RECT, cropFrameRect);
         return this;
     }
 

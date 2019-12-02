@@ -13,7 +13,7 @@ public class SavedImageState {
     private String originalPath;
     private String destinationPath;
     private float[] imageMatrixValues; // 9 values of matrix
-    private RectF cropRect;
+    private RectF cropFrameRect;
     private UCrop ucropConfig;
 
     public SavedImageState() {}
@@ -27,8 +27,8 @@ public class SavedImageState {
         this.imageMatrixValues = imageMatrixValues;
     }
 
-    public void setCropRect(RectF cropRect) {
-        this.cropRect = cropRect;
+    public void setCropFrameRect(RectF cropFrameRect) {
+        this.cropFrameRect = cropFrameRect;
     }
 
     public void setUcropConfig(UCrop ucropConfig) {
@@ -47,8 +47,8 @@ public class SavedImageState {
         return imageMatrixValues;
     }
 
-    public RectF getCropRect() {
-        return cropRect;
+    public RectF getCropFrameRect() {
+        return cropFrameRect;
     }
 
     public UCrop getUcropConfig() {

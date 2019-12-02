@@ -567,7 +567,7 @@ public class UCropFragment extends Fragment {
             int imageWidth,
             int imageHeight,
             float[] imageMatrixValues,
-            RectF cropRect
+            RectF cropFrameRect
     ) {
         return new UCropResult(RESULT_OK, new Intent()
                 .putExtra(UCrop.EXTRA_OUTPUT_URI, uri)
@@ -577,7 +577,7 @@ public class UCropFragment extends Fragment {
                 .putExtra(UCrop.EXTRA_OUTPUT_OFFSET_X, offsetX)
                 .putExtra(UCrop.EXTRA_OUTPUT_OFFSET_Y, offsetY)
                 .putExtra(UCrop.EXTRA_IMAGE_MATRIX_VALUES, imageMatrixValues)
-                .putExtra(UCrop.EXTRA_CROP_RECT, cropRect)
+                .putExtra(UCrop.EXTRA_CROP_FRAME_RECT, cropFrameRect)
         );
     }
 

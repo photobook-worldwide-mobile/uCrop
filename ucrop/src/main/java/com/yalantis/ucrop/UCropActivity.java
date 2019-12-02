@@ -199,9 +199,9 @@ public class UCropActivity extends AppCompatActivity {
         // azri92 - set saved image state if it exists
         float[] savedImageMatrixValues = intent.getFloatArrayExtra(UCrop.EXTRA_IMAGE_MATRIX_VALUES);
         if (savedImageMatrixValues != null) {
-            RectF savedCropRect = intent.getParcelableExtra(UCrop.EXTRA_CROP_RECT);
-            mUCropView.setSavedState(savedCropRect);
-            mGestureCropImageView.setSavedState(savedImageMatrixValues, savedCropRect);
+            RectF savedCropFrameRect = intent.getParcelableExtra(UCrop.EXTRA_CROP_FRAME_RECT);
+            mUCropView.setSavedState(savedCropFrameRect);
+            mGestureCropImageView.setSavedState(savedImageMatrixValues, savedCropFrameRect);
         }
 
         if (inputUri != null && outputUri != null) {
@@ -707,7 +707,7 @@ public class UCropActivity extends AppCompatActivity {
             int imageWidth,
             int imageHeight,
             float[] savedImageMatrixValues,
-            RectF cropRect
+            RectF cropFrameRect
     ) {
         setResult(RESULT_OK, new Intent()
                 .putExtra(UCrop.EXTRA_OUTPUT_URI, uri)
@@ -717,7 +717,7 @@ public class UCropActivity extends AppCompatActivity {
                 .putExtra(UCrop.EXTRA_OUTPUT_OFFSET_X, offsetX)
                 .putExtra(UCrop.EXTRA_OUTPUT_OFFSET_Y, offsetY)
                 .putExtra(UCrop.EXTRA_IMAGE_MATRIX_VALUES, savedImageMatrixValues)
-                .putExtra(UCrop.EXTRA_CROP_RECT, cropRect)
+                .putExtra(UCrop.EXTRA_CROP_FRAME_RECT, cropFrameRect)
         );
     }
 
