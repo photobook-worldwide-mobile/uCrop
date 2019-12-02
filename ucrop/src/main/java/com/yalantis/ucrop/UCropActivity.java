@@ -340,8 +340,8 @@ public class UCropActivity extends AppCompatActivity {
             mLayoutScale = findViewById(R.id.layout_scale_wheel);
 
             setupAspectRatioWidget(intent);
-            setupRotateWidget();
-            setupScaleWidget();
+//            setupRotateWidget();
+//            setupScaleWidget();
             setupStatesWrapper();
         }
     }
@@ -616,7 +616,7 @@ public class UCropActivity extends AppCompatActivity {
         mLayoutRotate.setVisibility(stateViewId == R.id.state_rotate ? View.VISIBLE : View.GONE);
         mLayoutScale.setVisibility(stateViewId == R.id.state_scale ? View.VISIBLE : View.GONE);
 
-        changeSelectedTab(stateViewId);
+//        changeSelectedTab(stateViewId);
 
         if (stateViewId == R.id.state_scale) {
             setAllowedGestures(0);

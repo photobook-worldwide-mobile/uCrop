@@ -82,6 +82,7 @@
                 android:id="@+id/text_view_rotate"
                 style="@style/ucrop_TextViewWidget"
                 android:text="@string/ucrop_rotate" />
+                android:textColor="@color/ucrop_pb_blue"/>
 
         </LinearLayout>
 
