@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.yalantis.ucrop.callback.BitmapCropCallback;
 import com.yalantis.ucrop.model.AspectRatio;
+import com.yalantis.ucrop.model.BleedPercentage;
 import com.yalantis.ucrop.util.SelectedStateListDrawable;
 import com.yalantis.ucrop.view.CropImageView;
 import com.yalantis.ucrop.view.GestureCropImageView;
@@ -204,6 +205,14 @@ public class UCropActivity extends AppCompatActivity {
             mGestureCropImageView.setSavedState(savedImageMatrixValues, savedCropFrameRect);
         }
 
+        BleedPercentage bleedPercentage = new BleedPercentage(
+                intent.getFloatExtra(UCrop.EXTRA_BLEED_PERCENTAGE_LEFT, 0f),
+                intent.getFloatExtra(UCrop.EXTRA_BLEED_PERCENTAGE_TOP, 0f),
+                intent.getFloatExtra(UCrop.EXTRA_BLEED_PERCENTAGE_RIGHT, 0f),
+                intent.getFloatExtra(UCrop.EXTRA_BLEED_PERCENTAGE_BOTTOM, 0f)
+        );
+        mOverlayView.setBleedValues(bleedPercentage);
+
         if (inputUri != null && outputUri != null) {
             try {
                 mGestureCropImageView.setImageUri(inputUri, outputUri);
@@ -253,6 +262,7 @@ public class UCropActivity extends AppCompatActivity {
         mOverlayView.setShowCropFrame(intent.getBooleanExtra(UCrop.Options.EXTRA_SHOW_CROP_FRAME, OverlayView.DEFAULT_SHOW_CROP_FRAME));
         mOverlayView.setCropFrameColor(intent.getIntExtra(UCrop.Options.EXTRA_CROP_FRAME_COLOR, getResources().getColor(R.color.ucrop_color_default_crop_frame)));
         mOverlayView.setCropFrameStrokeWidth(intent.getIntExtra(UCrop.Options.EXTRA_CROP_FRAME_STROKE_WIDTH, getResources().getDimensionPixelSize(R.dimen.ucrop_default_crop_frame_stoke_width)));
+        mOverlayView.setBleedRectColor(intent.getIntExtra(UCrop.Options.EXTRA_BLEED_RECT_COLOR, getResources().getColor(R.color.ucrop_blush_red_translucent)));
 
         mOverlayView.setShowCropGrid(intent.getBooleanExtra(UCrop.Options.EXTRA_SHOW_CROP_GRID, OverlayView.DEFAULT_SHOW_CROP_GRID));
         mOverlayView.setCropGridRowCount(intent.getIntExtra(UCrop.Options.EXTRA_CROP_GRID_ROW_COUNT, OverlayView.DEFAULT_CROP_GRID_ROW_COUNT));

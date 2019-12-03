@@ -9,11 +9,13 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.yalantis.ucrop.R;
 import com.yalantis.ucrop.callback.OverlayViewChangeListener;
+import com.yalantis.ucrop.model.BleedPercentage;
 import com.yalantis.ucrop.util.RectUtils;
 
 import java.lang.annotation.Retention;
@@ -44,6 +46,11 @@ public class OverlayView extends View {
     public static final int DEFAULT_CROP_GRID_COLUMN_COUNT = 2;
 
     private final RectF mCropViewRect = new RectF();
+    private final RectF mTrimViewRect = new RectF();
+    private final RectF mLeftBleedRect = new RectF();
+    private final RectF mTopBleedRect = new RectF();
+    private final RectF mRightBleedRect = new RectF();
+    private final RectF mBottomBleedRect = new RectF();
     private final RectF mTempRect = new RectF();
 
     protected int mThisWidth, mThisHeight;
@@ -61,7 +68,9 @@ public class OverlayView extends View {
     private Paint mCropGridPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Paint mCropFramePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Paint mCropFrameCornersPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint mCropBleedPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private RectF mSavedCropRect;
+    private BleedPercentage mBleedPercentage;
     @FreestyleMode
     private int mFreestyleCropMode = DEFAULT_FREESTYLE_CROP_MODE;
     private float mPreviousTouchX = -1, mPreviousTouchY = -1;
@@ -109,6 +118,19 @@ public class OverlayView extends View {
      */
     public void setSavedCropRect(RectF savedCropRect) {
         mSavedCropRect = savedCropRect;
+    }
+
+    /**
+     * @author azri92
+     *
+     * @param bleedPercentage - valid BleedPercentage object
+     */
+    public void setBleedValues(BleedPercentage bleedPercentage) {
+        mBleedPercentage = bleedPercentage;
+    }
+
+    public void setBleedRectColor(int colorInt) {
+        mCropBleedPaint.setColor(colorInt);
     }
 
     @NonNull
@@ -240,7 +262,9 @@ public class OverlayView extends View {
     }
 
     /**
-     * This method setups crop bounds rectangles for given aspect ratio and view size.
+     * This method sets up crop bounds' rectangles for given aspect ratio and view size.
+     * azri92 - It also sets up trim bounds and bleed rectangles.
+     *
      * {@link #mCropViewRect} is used to draw crop bounds - uses padding.
      */
     public void setupCropBounds() {
@@ -262,12 +286,65 @@ public class OverlayView extends View {
                     getPaddingLeft() + mThisWidth, getPaddingTop() + height + halfDiff);
         }
 
+        setupTrimBoundsWithBleed();
+        setupBleedRects();
+
         if (mCallback != null) {
             mCallback.onCropRectUpdated(mCropViewRect);
         }
 
         updateGridPoints();
     }
+
+    /**
+     * @author azri92
+     * Calculates the bounds for trim view rect.
+     *
+     * Side note: When a trim view rect side is equals to the crop view rect's, it means the side has no bleed.
+     */
+    private void setupTrimBoundsWithBleed() {
+        float leftBleedDistance = mCropViewRect.width() * mBleedPercentage.left;
+        float trimViewLeft = mCropViewRect.left + leftBleedDistance;
+
+        float topBleedDistance = mCropViewRect.height() * mBleedPercentage.top;
+        float trimViewTop = mCropViewRect.top + topBleedDistance;
+
+        float rightBleedDistance = mCropViewRect.width() * mBleedPercentage.right;
+        float trimViewRight = mCropViewRect.right - rightBleedDistance;
+
+        float bottomBleedDistance = mCropViewRect.height() * mBleedPercentage.bottom;
+        float trimViewBottom = mCropViewRect.bottom - bottomBleedDistance;
+
+        Log.d("BLEED", "calculation of trimViewLeft (" + trimViewLeft + ") = cropViewRect.left (" + mCropViewRect.left + ") + " +
+                "mCropViewRect.width (" + mCropViewRect.width() + ") * " + "mBleedPercentage.left (" + mBleedPercentage.left + ")");
+        Log.d("BLEED", "calculation of trimViewTop (" + trimViewTop + ") = cropViewRect.top (" + mCropViewRect.top + ") + " +
+                "mCropViewRect.height (" + mCropViewRect.height() + ") * " + "mBleedPercentage.top (" + mBleedPercentage.top + ")");
+
+        mTrimViewRect.set(trimViewLeft, trimViewTop, trimViewRight, trimViewBottom);
+    }
+
+    /**
+     * @author azri92
+     * Sets bleed rects if any to be used for drawing on canvas.
+     */
+    private void setupBleedRects() {
+        if (mBleedPercentage.left > 0) {
+            mLeftBleedRect.set(mCropViewRect.left, mCropViewRect.top, mTrimViewRect.left, mCropViewRect.bottom);
+        }
+
+        if (mBleedPercentage.top > 0) {
+            mTopBleedRect.set(mCropViewRect.left, mCropViewRect.top, mCropViewRect.right, mTrimViewRect.top);
+        }
+
+        if (mBleedPercentage.right > 0) {
+            mRightBleedRect.set(mTrimViewRect.right, mCropViewRect.top, mCropViewRect.right, mCropViewRect.bottom);
+        }
+
+        if (mBleedPercentage.bottom > 0) {
+            mBottomBleedRect.set(mCropViewRect.left, mTrimViewRect.bottom, mCropViewRect.right, mCropViewRect.bottom);
+        }
+    }
+
 
     private void updateGridPoints() {
         mCropGridCorners = RectUtils.getCornersFromRect(mCropViewRect);
@@ -310,6 +387,7 @@ public class OverlayView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawDimmedLayer(canvas);
+        drawBleedRects(canvas);
         drawCropGrid(canvas);
     }
 
@@ -478,6 +556,30 @@ public class OverlayView extends View {
         if (mCircleDimmedLayer) { // Draw 1px stroke to fix antialias
             canvas.drawCircle(mCropViewRect.centerX(), mCropViewRect.centerY(),
                     Math.min(mCropViewRect.width(), mCropViewRect.height()) / 2.f, mDimmedStrokePaint);
+        }
+    }
+
+    /**
+     * @author azri92
+     * Draws the bleed rects on canvas if any.
+     *
+     * @param canvas - valid canvas object
+     */
+    protected void drawBleedRects(@NonNull Canvas canvas) {
+        if (mBleedPercentage.left > 0) {
+            canvas.drawRect(mLeftBleedRect, mCropBleedPaint);
+        }
+
+        if (mBleedPercentage.top > 0) {
+            canvas.drawRect(mTopBleedRect, mCropBleedPaint);
+        }
+
+        if (mBleedPercentage.right > 0) {
+            canvas.drawRect(mRightBleedRect, mCropBleedPaint);
+        }
+
+        if (mBleedPercentage.bottom > 0) {
+            canvas.drawRect(mBottomBleedRect, mCropBleedPaint);
         }
     }
 

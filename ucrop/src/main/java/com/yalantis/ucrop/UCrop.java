@@ -50,6 +50,11 @@ public class UCrop {
     public static final String EXTRA_CROP_FRAME_RECT = EXTRA_PREFIX + ".CropRect";
     public static final String EXTRA_ERROR = EXTRA_PREFIX + ".Error";
 
+    public static final String EXTRA_BLEED_PERCENTAGE_LEFT = EXTRA_PREFIX + ".BleedPercentageLeft";
+    public static final String EXTRA_BLEED_PERCENTAGE_TOP = EXTRA_PREFIX + ".BleedPercentageTop";
+    public static final String EXTRA_BLEED_PERCENTAGE_RIGHT = EXTRA_PREFIX + ".BleedPercentageRight";
+    public static final String EXTRA_BLEED_PERCENTAGE_BOTTOM = EXTRA_PREFIX + ".BleedPercentageBottom";
+
     public static final String EXTRA_ASPECT_RATIO_X = EXTRA_PREFIX + ".AspectRatioX";
     public static final String EXTRA_ASPECT_RATIO_Y = EXTRA_PREFIX + ".AspectRatioY";
 
@@ -302,6 +307,7 @@ public class UCrop {
         public static final String EXTRA_SHOW_CROP_FRAME = EXTRA_PREFIX + ".ShowCropFrame";
         public static final String EXTRA_CROP_FRAME_COLOR = EXTRA_PREFIX + ".CropFrameColor";
         public static final String EXTRA_CROP_FRAME_STROKE_WIDTH = EXTRA_PREFIX + ".CropFrameStrokeWidth";
+        public static final String EXTRA_BLEED_RECT_COLOR = EXTRA_PREFIX + ".BleedRectColor";
 
         public static final String EXTRA_SHOW_CROP_GRID = EXTRA_PREFIX + ".ShowCropGrid";
         public static final String EXTRA_CROP_GRID_ROW_COUNT = EXTRA_PREFIX + ".CropGridRowCount";
@@ -459,6 +465,15 @@ public class UCrop {
          */
         public void setCropGridStrokeWidth(@IntRange(from = 0) int width) {
             mOptionBundle.putInt(EXTRA_CROP_GRID_STROKE_WIDTH, width);
+        }
+
+        /**
+         * @author azri92
+         *
+         * @param color - desired width of crop frame line in pixels
+         */
+        public void setBleedRectColor(@ColorInt int color) {
+            mOptionBundle.putInt(EXTRA_BLEED_RECT_COLOR, color);
         }
 
         /**
