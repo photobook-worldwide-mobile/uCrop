@@ -395,7 +395,6 @@ public class CropImageView extends TransformImageView {
         // azri92 - Reload from saved state
         if (savedImageStateExists()) {
 
-            setupInitialImagePositionFromSavedState();
             mCropRect.set(getSavedCropRect());
             mTargetAspectRatio = mCropRect.width() / mCropRect.height();
 
@@ -419,11 +418,16 @@ public class CropImageView extends TransformImageView {
             }
 
             calculateImageScaleBounds(drawableWidth, drawableHeight);
-            setupInitialImagePosition(drawableWidth, drawableHeight);
         }
 
         if (mCropBoundsChangeListener != null) {
             mCropBoundsChangeListener.onCropAspectRatioChanged(mTargetAspectRatio);
+            // azri92 - setup the initial position of image once the crop rect is set
+            if (savedImageStateExists()) {
+                setupInitialImagePositionFromSavedState();
+            } else {
+                setupInitialImagePosition(getDrawable().getIntrinsicWidth(), getDrawable().getIntrinsicHeight());
+            }
         }
         if (mTransformImageListener != null) {
             mTransformImageListener.onScale(getCurrentScale());
@@ -516,9 +520,10 @@ public class CropImageView extends TransformImageView {
         float cropRectWidth = mCropRect.width();
         float cropRectHeight = mCropRect.height();
 
-        // azri92 - Consider starting rotation angle
-        float realDrawableWidth = mStartingRotationAngle > 0 ? drawableHeight : drawableWidth;
-        float realDrawableHeight = mStartingRotationAngle > 0 ? drawableWidth : drawableHeight;
+        // azri92: Add functionality to start with a different orientation
+        boolean isImageOrientationChanged = mStartingRotationAngle == 90 || mStartingRotationAngle == 270;
+        float realDrawableWidth = isImageOrientationChanged ? drawableHeight : drawableWidth;
+        float realDrawableHeight = isImageOrientationChanged ? drawableWidth : drawableHeight;
 
         float widthScale = mCropRect.width() / realDrawableWidth;
         float heightScale = mCropRect.height() / realDrawableHeight;
@@ -527,7 +532,7 @@ public class CropImageView extends TransformImageView {
 
         mCurrentImageMatrix.reset();
         mCurrentImageMatrix.postScale(initialMinScale, initialMinScale);
-        if (mStartingRotationAngle > 0) {
+        if (isImageOrientationChanged) {
             mCurrentImageMatrix.postRotate(mStartingRotationAngle);
         } else {
             float tw = (cropRectWidth - realDrawableWidth * initialMinScale) / 2.0f + mCropRect.left;
@@ -537,14 +542,22 @@ public class CropImageView extends TransformImageView {
 
         setImageMatrix(mCurrentImageMatrix);
 
-        if (mStartingRotationAngle > 0) {
+        if (isImageOrientationChanged) {
             // At this point, the drawable is out of the crop bounds so we want to bring it back in
             setImageToWrapCropBounds(false);
-            // And now the drawable is protruding out the left side of the crop boundary so we center it by pushing it
-            // a bit to the right
             float updatedDrawableWidth = realDrawableWidth * initialMinScale;
-            float translateX = (updatedDrawableWidth - cropRectWidth) / 2f;
-            mCurrentImageMatrix.postTranslate(translateX, 0);
+            float updatedDrawableHeight = realDrawableHeight * initialMinScale;
+            float translateX = 0f;
+            float translateY = 0f;
+            if (mStartingRotationAngle == 90) {
+                translateX = (updatedDrawableWidth - cropRectWidth) / 2f;
+                if (updatedDrawableWidth >= updatedDrawableHeight) {
+                    translateY = (updatedDrawableHeight - cropRectHeight) / 2f;
+                }
+            } else if (mStartingRotationAngle == 270) {
+                // TODO: Need to investigate how to better support this. The behavior seems inconsistent.
+            }
+            mCurrentImageMatrix.postTranslate(translateX, translateY);
             setImageMatrix(mCurrentImageMatrix);
         }
     }
