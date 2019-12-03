@@ -39,9 +39,9 @@
     <ImageView
         android:id="@+id/controls_shadow"
         android:layout_width="match_parent"
-        android:layout_height="8dp"
+        android:layout_height="@dimen/ucrop_height_divider_shadow"
         android:layout_alignBottom="@+id/wrapper_controls"
-        android:src="@drawable/ucrop_shadow_upside" />
+        android:background="@color/ucrop_light_grey" />
 
     <LinearLayout
         android:id="@+id/wrapper_states"
