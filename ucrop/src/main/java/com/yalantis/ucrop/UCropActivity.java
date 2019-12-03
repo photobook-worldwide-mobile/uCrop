@@ -319,8 +319,8 @@ public class UCropActivity extends AppCompatActivity {
             wrapper.setBackgroundColor(mRootViewBackgroundColor);
             LayoutInflater.from(this).inflate(R.layout.ucrop_controls, wrapper, true);
 
-            mControlsTransition = new AutoTransition();
-            mControlsTransition.setDuration(CONTROLS_ANIMATION_DURATION);
+//            mControlsTransition = new AutoTransition();
+//            mControlsTransition.setDuration(CONTROLS_ANIMATION_DURATION);
 
             mWrapperStateAspectRatio = findViewById(R.id.state_aspect_ratio);
             mWrapperStateAspectRatio.setOnClickListener(mStateClickListener);
