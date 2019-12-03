@@ -138,6 +138,7 @@ public class BitmapCropTask extends AsyncTask<Void, Void, Throwable> {
         return resizeScale;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private boolean crop(float resizeScale) throws IOException {
         ExifInterface originalExif = new ExifInterface(mImageInputPath);
 
