@@ -109,6 +109,23 @@ public class UCrop {
 
     /**
      * @author azri92
+     * Set values for bleed distance from crop rect.
+     *
+     * @param left percentage value
+     * @param top percentage value
+     * @param right percentage value
+     * @param bottom percentage value
+     */
+    public UCrop withBleed(float left, float top, float right, float bottom) {
+        mCropOptionsBundle.putFloat(EXTRA_BLEED_PERCENTAGE_LEFT, left);
+        mCropOptionsBundle.putFloat(EXTRA_BLEED_PERCENTAGE_TOP, top);
+        mCropOptionsBundle.putFloat(EXTRA_BLEED_PERCENTAGE_RIGHT, right);
+        mCropOptionsBundle.putFloat(EXTRA_BLEED_PERCENTAGE_BOTTOM, bottom);
+        return this;
+    }
+
+    /**
+     * @author azri92
      * Set value of the angle to immediately rotate the image to when starting to edit.
      *
      * @param angle of rotation
